@@ -16,10 +16,15 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: idodidodi/hello-flask:v2
+          image: idodidodi/hello-flask:v2.1
           ports:
             - containerPort: 5000
           env:
+            - name: FLASK_RUN_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-app-configmap
+                  key: FLASK_RUN_PORT
             - name: APP_ENV
               valueFrom:
                 secretKeyRef:

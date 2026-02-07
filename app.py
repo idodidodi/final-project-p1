@@ -12,6 +12,7 @@ def hello():
     return f"""
     ENV: {os.environ.get('APP_ENV')}<br>
     MESSAGE: {os.environ.get('APP_MESSAGE')}<br>
+    PORT: {os.environ.get('FLASK_RUN_PORT')}<br>
     PASSWORD: {os.environ.get('DB_PASSWORD')}
     """
     
