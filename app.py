@@ -15,6 +15,14 @@ def hello():
     PORT: {os.environ.get('FLASK_RUN_PORT')}<br>
     PASSWORD: {os.environ.get('DB_PASSWORD')}
     """
+
+@app.route("/health/live")
+def live():
+    return "OK", 200
+
+@app.route("/health/ready")
+def ready():
+    return "READY", 200
     
 if __name__ == '__main__':
     app.run(debug=True)
