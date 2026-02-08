@@ -16,9 +16,22 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: idodidodi/hello-flask:v2.1
+          image: idodidodi/hello-flask:v3.1
           ports:
             - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
           env:
             - name: FLASK_RUN_PORT
               valueFrom:
@@ -107,7 +120,7 @@ metadata:
   name: flask-cronjob
 spec:
   schedule: "*/1 * * * *"
-
+  suspend: true
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 5
 
