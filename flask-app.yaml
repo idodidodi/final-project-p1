@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: idodidodi/hello-flask:v3.1
+          image: idodidodi/hello-flask:v3.2
           ports:
             - containerPort: 5000
           readinessProbe:
