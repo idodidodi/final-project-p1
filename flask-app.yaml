@@ -100,3 +100,27 @@ spec:
         target:
           type: Utilization
           averageUtilization: 50
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: flask-cronjob
+spec:
+  schedule: "*/1 * * * *"
+
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 5
+
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 100
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: curl-container
+              image: busybox
+              command:
+                - /bin/sh
+                - -c
+                - wget -q -O- http://flask-app-service/hello
