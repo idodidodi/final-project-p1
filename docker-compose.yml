@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
 
-    image: idodidodi/hello-flask:v2.1
+    image: idodidodi/hello-flask:v3.1
 
     ports:
       - "5000:5000"

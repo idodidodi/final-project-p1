@@ -16,13 +16,32 @@ def hello():
     PASSWORD: {os.environ.get('DB_PASSWORD')}
     """
 
+# @app.route("/health/live")
+# def live():
+#     return "OK", 200
+
+# @app.route("/health/ready")
+# def ready():
+#     return "READY", 200
+import random
+
 @app.route("/health/live")
 def live():
-    return "OK", 200
+    # 80% chance to be healthy
+    if random.random() < 0.1:
+        return "OK", 200
+    else:
+        return "NOT OK", 500
+
 
 @app.route("/health/ready")
 def ready():
-    return "READY", 200
-    
+    # 70% chance to be ready
+    if random.random() < 0.1:
+        return "READY", 200
+    else:
+        return "NOT READY", 500
+
+
 if __name__ == '__main__':
     app.run(debug=True)
