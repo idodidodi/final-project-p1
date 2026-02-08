@@ -1,0 +1,21 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "flask-app.fullname" . }}
+  labels:
+    {{- include "flask-app.labels" . | nindent 4 }}
+spec:
+  schedule: "*/1 * * * *"
+  suspend: true
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 5
+
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: {{ .Values.cronjob.ttlSecondsAfterFinished }}
+      template:
+        spec:
+          restartPolicy: {{ .Values.cronjob.restartPolicy }}
+          containers:
+            {{- toYaml .Values.cronjob.containers | nindent 12 }}
