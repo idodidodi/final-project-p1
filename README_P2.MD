@@ -27,6 +27,12 @@ eval $(minikube docker-env)
 docker-compose build
 ```
 
+Switch back to local Docker after deployment:
+
+```bash
+eval $(minikube docker-env -u)
+```
+
 ## 4. Apply Kubernetes Resources
 
 Apply the configuration files to the cluster. Note that `flask-app.yaml` contains the Deployment, Service, ConfigMap, HPA, and CronJob definitions.
